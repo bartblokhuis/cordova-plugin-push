@@ -82,11 +82,9 @@
 //  FCM refresh token
 //  Unclear how this is testable under normal circumstances
 - (void)onTokenRefresh {
-#if !TARGET_IPHONE_SIMULATOR
     // A rotation of the registration tokens is happening, so the app needs to request a new token.
     NSLog(@"The FCM registration token needs to be changed.");
     [self initRegistration];
-#endif
 }
 
 // contains error info
@@ -358,8 +356,6 @@
                        stringByReplacingOccurrencesOfString: @" " withString: @""];
 #endif
 
-#if !TARGET_IPHONE_SIMULATOR
-
     // Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
 
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -370,9 +366,6 @@
             [weakSelf registerWithToken: token];
         }
     }];
-
-
-#endif
 }
 
 - (NSString *)hexadecimalStringFromData:(NSData *)data
